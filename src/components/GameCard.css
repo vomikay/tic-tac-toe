@@ -6,33 +6,33 @@
   padding: 5px;
 }
 
-.game-card_theme_gray {
+.game-card_theme_ready {
   background-color: #828282;
 }
 
-.game-card_theme_light-gray {
+.game-card_theme_not-ready {
   background-color: #bdbdbd;
 }
 
-.game-card__player-name {
+.game-card__name {
   display: flex;
   height: 36px;
   margin: 2px 0;
 }
 
-.game-card__player-name-text {
+.game-card__name-text {
   margin: 0;
 }
 
-.game-card__player-name_theme_default {
+.game-card__name_theme_default {
   color: #ebebeb;
 }
 
-.game-card__player-name_theme_won {
+.game-card__name_theme_won {
   color: #f2994a;
 }
 
-.game-card__player-name_theme_drew {
+.game-card__name_theme_drew {
   color: #3662fe;
 }
 
