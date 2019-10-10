@@ -1,15 +1,47 @@
 .game-card {
   display: flex;
   flex-direction: column;
-  height: 98px;
-  width: 98px;
-  padding: 2px;
+  height: 95px;
+  width: 95px;
+  padding: 5px;
+}
+
+.game-card_theme_gray {
   background-color: #828282;
 }
 
+.game-card_theme_light-gray {
+  background-color: #bdbdbd;
+}
+
 .game-card__player-name {
-  color: #e4e4e4;
-  margin: 5px 0;
+  display: flex;
+  height: 36px;
+  margin: 2px 0;
+}
+
+.game-card__player-name-text {
+  margin: 0;
+}
+
+.game-card__player-name_theme_default {
+  color: #ebebeb;
+}
+
+.game-card__player-name_theme_won {
+  color: #f2994a;
+}
+
+.game-card__player-name_theme_drew {
+  color: #3662fe;
+}
+
+.game-card__separator {
+  color: #828282;
+  background-color: #828282;
+  height: 1px;
+  border: 1px none;
+  margin: 0;
 }
 
 .game-card__time {
