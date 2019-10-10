@@ -1,19 +1,19 @@
 import React from "react";
 import "./PlayerNameInput.css";
-import store from "../store";
-import { inputPlayerName } from "../actions/player";
 
-const PlayerNameInput: React.FC = () => {
-  const onInputPlayerName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.value;
-    store.dispatch(inputPlayerName(name));
-  };
+type Props = {
+  onChange: (name: string) => void;
+};
+
+const PlayerNameInput: React.FC<Props> = ({ onChange: onInput }) => {
   return (
     <div className="player-name-input">
       <input
         className="player-name-input__editor"
         type="text"
-        onInput={onInputPlayerName}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          onInput(e.target.value)
+        }
       />
       <span className="player-name-input__highlight"></span>
     </div>

@@ -6,5 +6,7 @@ const reducers = combineReducers({
   player: playerReducer
 });
 
+export type AppState = ReturnType<typeof reducers>;
+
 const store = createStore(reducers, applyMiddleware(logger));
 export default store;
