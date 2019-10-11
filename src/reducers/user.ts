@@ -1,20 +1,19 @@
 import { UserState } from "../store/types";
-import { UserAction, INPUT_PLAYER_NAME } from "../actions/user";
+import { UserAction, INPUT_USER_NAME } from "../actions/user";
+import { Reducer } from "redux";
 
 const initialState: UserState = {
   name: ""
 };
 
-export function userReducer(
+export const userReducer: Reducer<UserState, UserAction> = (
   state = initialState,
-  action: UserAction
-): UserState {
+  action
+) => {
   switch (action.type) {
-    case INPUT_PLAYER_NAME:
-      return {
-        name: action.payload
-      };
+    case INPUT_USER_NAME:
+      return { name: action.payload };
     default:
       return state;
   }
-}
+};

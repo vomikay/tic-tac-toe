@@ -1,15 +1,16 @@
-export const INPUT_PLAYER_NAME = "INPUT_PLAYER_NAME";
+import { Action, ActionCreator } from "redux";
 
-interface InputUserNameAction {
-  type: typeof INPUT_PLAYER_NAME;
+export const INPUT_USER_NAME = "INPUT_USER_NAME";
+
+interface InputUserNameAction extends Action<typeof INPUT_USER_NAME> {
   payload: string;
 }
 
 export type UserAction = InputUserNameAction;
 
-export function inputUserName(name: string): InputUserNameAction {
-  return {
-    type: INPUT_PLAYER_NAME,
-    payload: name
-  };
-}
+export const inputUserName: ActionCreator<InputUserNameAction> = (
+  name: string
+) => ({
+  type: INPUT_USER_NAME,
+  payload: name
+});

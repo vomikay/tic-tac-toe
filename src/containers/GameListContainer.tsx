@@ -1,44 +1,48 @@
 import React from "react";
 import GameList from "../components/GameList";
-import GameInfo from "../models/gameInfo";
+import Game from "../models/game";
 
 class GameListContainer extends React.Component {
-  private games: GameInfo[] = [
+  private games: Game[] = [
     {
-      gameToken: "1",
+      token: "1",
       owner: "First Person",
       opponent: "",
       size: 3,
-      gameDuration: 123232,
-      gameResult: "",
-      state: "ready"
+      duration: 123232,
+      result: "",
+      state: "ready",
+      field: []
     },
     {
-      gameToken: "2",
+      token: "2",
       owner: "First Person",
       opponent: "Second Person",
       size: 3,
-      gameDuration: 342343,
-      gameResult: "",
-      state: "playing"
+      duration: 342343,
+      result: "",
+      state: "playing",
+      field: []
     },
     {
-      gameToken: "3",
+      token: "3",
       owner: "First Person",
       opponent: "Second Person",
       size: 3,
-      gameDuration: 3243223,
-      gameResult: "owner",
-      state: "done"
+      duration: 3243223,
+      result: "owner",
+      state: "done",
+      field: []
     },
     {
-      gameToken: "4",
+      token: "4",
       owner: "First Person",
       opponent: "Second Person",
       size: 3,
-      gameDuration: 1123213,
-      gameResult: "draw",
-      state: "done"
+      duration: 1123213,
+      result: "draw",
+      state: "done",
+      field: []
     }
   ];
 

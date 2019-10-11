@@ -1,9 +1,9 @@
 import React from "react";
 import "./GameCard.css";
-import GameInfo from "../models/gameInfo";
+import Game from "../models/game";
 
 type Props = {
-  game: GameInfo;
+  game: Game;
 };
 
 const CardTheme = {
@@ -18,28 +18,28 @@ const NameTheme = {
 };
 
 const GameCard: React.FC<Props> = ({ game }) => {
-  const isWinner = (userName: string, game: GameInfo) => {
+  const isWinner = (userName: string, game: Game) => {
     return (
-      (game.gameResult === "owner" || game.gameResult === "opponent") &&
-      userName === game[game.gameResult]
+      (game.result === "owner" || game.result === "opponent") &&
+      userName === game[game.result]
     );
   };
 
-  const getCardTheme = (game: GameInfo) => {
+  const getCardTheme = (game: Game) => {
     return game.state === "ready" ? CardTheme.READY : CardTheme.NOT_READY;
   };
 
-  const getNameTheme = (userName: string, game: GameInfo) => {
+  const getNameTheme = (userName: string, game: Game) => {
     if (isWinner(userName, game)) {
       return NameTheme.WON;
     }
-    if (game.gameResult === "draw") {
+    if (game.result === "draw") {
       return NameTheme.DREW;
     }
     return NameTheme.DEFAULT;
   };
 
-  const renderName = (userName: string, game: GameInfo) => {
+  const renderName = (userName: string, game: Game) => {
     return (
       <div className={`game-card__name ${getNameTheme(userName, game)}`}>
         <p className="game-card__name-text">{userName}</p>
