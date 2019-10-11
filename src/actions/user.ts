@@ -1,13 +1,13 @@
 export const INPUT_PLAYER_NAME = "INPUT_PLAYER_NAME";
 
-interface InputPlayerNameAction {
+interface InputUserNameAction {
   type: typeof INPUT_PLAYER_NAME;
   payload: string;
 }
 
-export type PlayerAction = InputPlayerNameAction;
+export type UserAction = InputUserNameAction;
 
-export function inputPlayerName(name: string): InputPlayerNameAction {
+export function inputUserName(name: string): InputUserNameAction {
   return {
     type: INPUT_PLAYER_NAME,
     payload: name

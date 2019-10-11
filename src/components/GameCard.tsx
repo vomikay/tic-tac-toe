@@ -18,10 +18,10 @@ const NameTheme = {
 };
 
 const GameCard: React.FC<Props> = ({ game }) => {
-  const isWinner = (playerName: string, game: GameInfo) => {
+  const isWinner = (userName: string, game: GameInfo) => {
     return (
       (game.gameResult === "owner" || game.gameResult === "opponent") &&
-      playerName === game[game.gameResult]
+      userName === game[game.gameResult]
     );
   };
 
@@ -29,8 +29,8 @@ const GameCard: React.FC<Props> = ({ game }) => {
     return game.state === "ready" ? CardTheme.READY : CardTheme.NOT_READY;
   };
 
-  const getNameTheme = (playerName: string, game: GameInfo) => {
-    if (isWinner(playerName, game)) {
+  const getNameTheme = (userName: string, game: GameInfo) => {
+    if (isWinner(userName, game)) {
       return NameTheme.WON;
     }
     if (game.gameResult === "draw") {
@@ -39,11 +39,11 @@ const GameCard: React.FC<Props> = ({ game }) => {
     return NameTheme.DEFAULT;
   };
 
-  const renderName = (playerName: string, game: GameInfo) => {
+  const renderName = (userName: string, game: GameInfo) => {
     return (
-      <div className={`game-card__name ${getNameTheme(playerName, game)}`}>
-        <p className="game-card__name-text">{playerName}</p>
-        {isWinner(playerName, game) && (
+      <div className={`game-card__name ${getNameTheme(userName, game)}`}>
+        <p className="game-card__name-text">{userName}</p>
+        {isWinner(userName, game) && (
           <p className="game-card__name-text">&#10004;</p>
         )}
       </div>

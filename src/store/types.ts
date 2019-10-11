@@ -1,3 +1,3 @@
-export interface PlayerState {
+export interface UserState {
   name: string;
 }

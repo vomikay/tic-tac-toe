@@ -2,12 +2,12 @@ import React from "react";
 import MainLayout from "./MainLayout";
 import GameListContainer from "../../containers/GameListContainer";
 import AddGameButton from "../AddGameButton";
-import PlayerNameInputContainer from "../../containers/PlayerNameInputContainer";
+import UserNameInputContainer from "../../containers/UserNameInputContainer";
 
 const HomeLayout = () => {
   return (
     <MainLayout>
-      <PlayerNameInputContainer />
+      <UserNameInputContainer />
       <GameListContainer />
       <AddGameButton />
     </MainLayout>
