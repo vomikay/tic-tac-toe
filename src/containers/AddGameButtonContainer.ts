@@ -3,12 +3,11 @@ import AddGameButton from "../components/AddGameButton";
 import { addGame, GameAction } from "../actions/game";
 import { ThunkDispatch } from "redux-thunk";
 import { AppState } from "../store";
+import { bindActionCreators } from "redux";
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<AppState, undefined, GameAction>
-) => ({
-  onClick: () => dispatch(addGame())
-});
+) => bindActionCreators({ onClick: addGame }, dispatch);
 
 const AddGameButtonContainer = connect(
   null,

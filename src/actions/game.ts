@@ -14,10 +14,11 @@ export const addGame: ActionCreator<
   ThunkAction<void, AppState, undefined, AddGameAction>
 > = () => {
   return (dispatch, getState) => {
-    if (getState().user.name) {
+    const { name } = getState().user;
+    if (name) {
       dispatch({
         type: ADD_GAME,
-        payload: getState().user.name
+        payload: name
       });
     }
   };
