@@ -13,7 +13,7 @@ export const gameReducer: Reducer<GameState, GameAction> = (
       return [
         ...state,
         {
-          token: state.length.toString(),
+          token: (state.length + 1).toString(),
           owner: action.payload,
           opponent: "",
           size: 3,
