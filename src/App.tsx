@@ -3,14 +3,14 @@ import HomeLayout from "./components/layouts/HomeLayout";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "./store";
 import { Switch, Route } from "react-router";
-import GameLayout from "./components/layouts/GameLayout";
+import GameLayoutContainer from "./containers/GameLayoutContainer";
 
 const App: React.FC = () => {
   return (
     <ConnectedRouter history={history}>
       <Switch>
         <Route exact path="/" component={HomeLayout} />
-        <Route path="/game" component={GameLayout} />
+        <Route path="/game/:token" component={GameLayoutContainer} />
       </Switch>
     </ConnectedRouter>
   );
