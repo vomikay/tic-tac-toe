@@ -4,6 +4,7 @@ import Game from "../../models/game";
 
 type Props = {
   game: Game;
+  onClick: (gameToken: string) => void;
 };
 
 const CardTheme = {
@@ -17,7 +18,7 @@ const NameTheme = {
   DREW: "game-card__name_theme_drew"
 };
 
-const GameCard: React.FC<Props> = ({ game }) => {
+const GameCard: React.FC<Props> = ({ game, onClick }) => {
   const isWinner = (userName: string, game: Game) => {
     return (
       (game.result === "owner" || game.result === "opponent") &&
@@ -51,7 +52,10 @@ const GameCard: React.FC<Props> = ({ game }) => {
   };
 
   return (
-    <div className={`game-card ${getCardTheme(game)}`}>
+    <div
+      className={`game-card ${getCardTheme(game)}`}
+      onClick={() => onClick(game.token)}
+    >
       {renderName(game.owner, game)}
       {game.state !== "ready" && game.owner && (
         <>

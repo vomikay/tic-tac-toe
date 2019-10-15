@@ -1,7 +1,7 @@
 import React from "react";
 import Game from "../../models/game";
 import { GridList, GridListTile } from "@material-ui/core";
-import GameCard from "./GameCard";
+import GameCardContainer from "../../containers/home/GameCardContainer";
 
 type Props = {
   games: Game[];
@@ -16,7 +16,7 @@ const GameList: React.FC<Props> = ({ games }) => {
           key={game.token}
           style={{ height: "auto" }}
         >
-          <GameCard game={game} />
+          <GameCardContainer game={game} />
         </GridListTile>
       ))}
     </GridList>

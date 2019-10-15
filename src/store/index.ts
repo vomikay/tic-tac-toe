@@ -6,7 +6,7 @@ import thunk from "redux-thunk";
 import { createLogger } from "redux-logger";
 import rootReducer from "../reducers";
 import { createStore, applyMiddleware } from "redux";
-import { CREATE_GAME } from "../actions/game";
+import { CREATE_GAME, JOIN_GAME } from "../actions/game";
 import { createStateSyncMiddleware } from "redux-state-sync";
 
 export const history = createBrowserHistory();
@@ -16,7 +16,7 @@ const persistConfig = {
   whitelist: ["games"]
 };
 const syncConfig = {
-  whitelist: [CREATE_GAME]
+  whitelist: [CREATE_GAME, JOIN_GAME]
 };
 const middlewares = [
   routerMiddleware(history),
