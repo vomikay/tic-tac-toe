@@ -1,5 +1,7 @@
 import React from "react";
 import "./AddGameButton.css";
+import { Fab } from "@material-ui/core";
+import { Add } from "@material-ui/icons";
 
 type Props = {
   onClick: () => void;
@@ -7,9 +9,9 @@ type Props = {
 
 const AddGameButton: React.FC<Props> = ({ onClick }) => {
   return (
-    <button className="fab" type="button" onClick={() => onClick()}>
-      +
-    </button>
+    <Fab className="add-game" onClick={() => onClick()}>
+      <Add fontSize="large" />
+    </Fab>
   );
 };
 

@@ -1,17 +1,12 @@
 .header {
-  display: flex;
-  align-items: center;
-  height: 56px;
+  flex-grow: 1;
+  padding: 16px 24px;
   background-color: #000;
-  padding: 0 24px;
-  box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.5);
 }
 
 .header__title {
-  margin: 0;
+  flex-grow: 1;
   color: #fff;
-  font-weight: normal;
-  font-size: 1.25em;
 }
 
 .main-content {

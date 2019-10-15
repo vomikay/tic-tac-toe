@@ -1,12 +1,15 @@
 import React from "react";
 import "./MainLayout.css";
+import { AppBar, Typography } from "@material-ui/core";
 
 const MainLayout: React.FC = ({ children }) => {
   return (
     <>
-      <header className="header">
-        <h1 className="header__title">Tic Tac Toe</h1>
-      </header>
+      <AppBar className="header" position="static">
+        <Typography className="header__title" variant="h6">
+          Tic tac toe
+        </Typography>
+      </AppBar>
       <main className="main-content">{children}</main>
     </>
   );

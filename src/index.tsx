@@ -5,13 +5,16 @@ import createStore from "./store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import App from "./App";
+import { StylesProvider } from "@material-ui/core";
 
 const { store, persistor } = createStore();
 
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <App />
+      <StylesProvider injectFirst>
+        <App />
+      </StylesProvider>
     </PersistGate>
   </Provider>,
   document.getElementById("root")

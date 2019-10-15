@@ -1,5 +1,5 @@
-import React from "react";
-import "./UserNameInput.css";
+import React, { ChangeEvent } from "react";
+import { TextField } from "@material-ui/core";
 
 type Props = {
   onChange: (name: string) => void;
@@ -7,16 +7,11 @@ type Props = {
 
 const UserNameInput: React.FC<Props> = ({ onChange }) => {
   return (
-    <div className="user-name-input">
-      <input
-        className="user-name-input__editor"
-        type="text"
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          onChange(e.target.value)
-        }
-      />
-      <span className="user-name-input__highlight"></span>
-    </div>
+    <TextField
+      placeholder="Введите имя"
+      margin="normal"
+      onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
+    />
   );
 };
 
