@@ -2,14 +2,14 @@ import React from "react";
 import Layout from "./Layout";
 import GameListContainer from "../../containers/home/GameListContainer";
 import UserNameInputContainer from "../../containers/home/UserNameInputContainer";
-import AddGameButtonContainer from "../../containers/home/AddGameButtonContainer";
+import CreateGameButtonContainer from "../../containers/home/CreateGameButtonContainer";
 
 const HomeLayout = () => {
   return (
     <Layout>
       <UserNameInputContainer />
       <GameListContainer />
-      <AddGameButtonContainer />
+      <CreateGameButtonContainer />
     </Layout>
   );
 };

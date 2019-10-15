@@ -1,6 +1,6 @@
 import { GameState } from "../store/types";
 import { Reducer } from "redux";
-import { GameAction, ADD_GAME } from "../actions/game";
+import { GameAction, CREATE_GAME } from "../actions/game";
 
 const initialState: GameState = [];
 
@@ -9,7 +9,7 @@ export const gameReducer: Reducer<GameState, GameAction> = (
   action
 ) => {
   switch (action.type) {
-    case ADD_GAME:
+    case CREATE_GAME:
       return [
         ...state,
         {
