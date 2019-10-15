@@ -11,7 +11,7 @@ interface CreateGameAction extends Action<typeof CREATE_GAME> {
 }
 
 interface JoinGameAction extends Action<typeof JOIN_GAME> {
-  payload: { userName: string; gameToken: string };
+  payload: { userName: string; gameId: number };
 }
 
 export type GameAction = CreateGameAction | JoinGameAction;
@@ -24,21 +24,21 @@ export const createGame: ActionCreator<
     if (name) {
       dispatch({ type: CREATE_GAME, payload: name });
       const games = getState().games;
-      const { token } = games[games.length - 1];
-      dispatch(push(`/game/${token}`));
+      const { id } = games[games.length - 1];
+      dispatch(push(`/game/${id}`));
     }
   };
 };
 
 export const joinGame: ActionCreator<
   ThunkAction<void, AppState, undefined, JoinGameAction | RouterAction>
-> = (gameToken: string) => {
+> = (gameId: number) => {
   return (dispatch, getState) => {
     const { name: userName } = getState().user;
-    const game = getState().games[+gameToken - 1];
+    const game = getState().games[+gameId - 1];
     if (userName && userName !== game.owner && game.state === "ready") {
-      dispatch({ type: JOIN_GAME, payload: { userName, gameToken } });
-      dispatch(push(`/game/${gameToken}`));
+      dispatch({ type: JOIN_GAME, payload: { userName, gameId } });
+      dispatch(push(`/game/${gameId}`));
     }
   };
 };

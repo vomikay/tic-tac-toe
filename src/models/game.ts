@@ -3,7 +3,7 @@ type GameState = "ready" | "playing" | "done";
 type Field = string[];
 
 interface Game {
-  token: string;
+  id: number;
   owner: string;
   opponent: string;
   size: number;

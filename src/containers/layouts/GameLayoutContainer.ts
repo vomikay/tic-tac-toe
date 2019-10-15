@@ -3,10 +3,10 @@ import GameLayout from "../../components/layouts/GameLayout";
 import { AppState } from "../../store";
 import { RouteComponentProps } from "react-router";
 
-type Props = RouteComponentProps<{ token: string }>;
+type Props = RouteComponentProps<{ id: string }>;
 
 const mapStateToProps = (state: AppState, ownProps: Props) => ({
-  game: state.games[+ownProps.match.params.token - 1]
+  game: state.games[+ownProps.match.params.id - 1]
 });
 
 const GameLayoutContainer = connect(mapStateToProps)(GameLayout);

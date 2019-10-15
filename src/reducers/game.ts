@@ -13,7 +13,7 @@ export const gameReducer: Reducer<GameState, GameAction> = (
       return [
         ...state,
         {
-          token: (state.length + 1).toString(),
+          id: state.length + 1,
           owner: action.payload,
           opponent: "",
           size: 3,
@@ -24,8 +24,8 @@ export const gameReducer: Reducer<GameState, GameAction> = (
         }
       ];
     case JOIN_GAME:
-      const { userName, gameToken } = action.payload;
-      const index = +gameToken - 1;
+      const { userName, gameId } = action.payload;
+      const index = +gameId - 1;
       return state
         .slice(0, index)
         .concat({ ...state[index], opponent: userName, state: "playing" })

@@ -4,7 +4,7 @@ import Game from "../../models/game";
 
 type Props = {
   game: Game;
-  onClick: (gameToken: string) => void;
+  onClick: (gameId: number) => void;
 };
 
 const CardTheme = {
@@ -54,7 +54,7 @@ const GameCard: React.FC<Props> = ({ game, onClick }) => {
   return (
     <div
       className={`game-card ${getCardTheme(game)}`}
-      onClick={() => onClick(game.token)}
+      onClick={() => onClick(game.id)}
     >
       {renderName(game.owner, game)}
       {game.state !== "ready" && game.owner && (

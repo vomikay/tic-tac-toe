@@ -13,7 +13,7 @@ const GameList: React.FC<Props> = ({ games }) => {
       {games.map(game => (
         <GridListTile
           className="game-list__item"
-          key={game.token}
+          key={game.id}
           style={{ height: "auto" }}
         >
           <GameCardContainer game={game} />
