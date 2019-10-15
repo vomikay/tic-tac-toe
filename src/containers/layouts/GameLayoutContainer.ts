@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import GameLayout from "../components/layouts/GameLayout";
-import { AppState } from "../store";
+import GameLayout from "../../components/layouts/GameLayout";
+import { AppState } from "../../store";
 import { RouteComponentProps } from "react-router";
 
 type Props = RouteComponentProps<{ token: string }>;

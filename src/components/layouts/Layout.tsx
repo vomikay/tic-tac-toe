@@ -1,5 +1,5 @@
 import React from "react";
-import "./MainLayout.css";
+import "./Layout.css";
 import { AppBar, Typography } from "@material-ui/core";
 
 const MainLayout: React.FC = ({ children }) => {

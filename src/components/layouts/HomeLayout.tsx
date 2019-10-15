@@ -1,16 +1,16 @@
 import React from "react";
-import MainLayout from "./MainLayout";
-import GameListContainer from "../../containers/GameListContainer";
-import UserNameInputContainer from "../../containers/UserNameInputContainer";
-import AddGameButtonContainer from "../../containers/AddGameButtonContainer";
+import Layout from "./Layout";
+import GameListContainer from "../../containers/home/GameListContainer";
+import UserNameInputContainer from "../../containers/home/UserNameInputContainer";
+import AddGameButtonContainer from "../../containers/home/AddGameButtonContainer";
 
 const HomeLayout = () => {
   return (
-    <MainLayout>
+    <Layout>
       <UserNameInputContainer />
       <GameListContainer />
       <AddGameButtonContainer />
-    </MainLayout>
+    </Layout>
   );
 };
 

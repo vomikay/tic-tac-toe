@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
-import AddGameButton from "../components/AddGameButton";
-import { addGame, GameAction } from "../actions/game";
+import AddGameButton from "../../components/home/AddGameButton";
+import { addGame, GameAction } from "../../actions/game";
 import { ThunkDispatch } from "redux-thunk";
-import { AppState } from "../store";
+import { AppState } from "../../store";
 import { bindActionCreators } from "redux";
 
 const mapDispatchToProps = (

@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import { inputUserName } from "../actions/user";
-import UserNameInput from "../components/UserNameInput";
+import { inputUserName } from "../../actions/user";
+import UserNameInput from "../../components/home/UserNameInput";
 
 const UserNameInputContainer = connect(
   null,

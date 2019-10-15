@@ -1,6 +1,6 @@
 import React from "react";
 import "./GameCard.css";
-import Game from "../models/game";
+import Game from "../../models/game";
 
 type Props = {
   game: Game;

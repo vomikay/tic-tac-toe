@@ -1,5 +1,5 @@
 import React from "react";
-import Game from "../models/game";
+import Game from "../../models/game";
 import { GridList, GridListTile } from "@material-ui/core";
 import GameCard from "./GameCard";
 

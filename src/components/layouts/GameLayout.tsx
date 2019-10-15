@@ -1,5 +1,5 @@
 import React from "react";
-import MainLayout from "./MainLayout";
+import Layout from "./Layout";
 import Game from "../../models/game";
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
 };
 
 const GameLayout: React.FC<Props> = ({ game }) => {
-  return <MainLayout>Game</MainLayout>;
+  return <Layout>Game</Layout>;
 };
 
 export default GameLayout;

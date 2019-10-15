@@ -1,6 +1,6 @@
-import GameList from "../components/GameList";
+import GameList from "../../components/home/GameList";
 import { connect } from "react-redux";
-import { AppState } from "../store";
+import { AppState } from "../../store";
 
 const mapStateToProps = ({ games }: AppState) => ({ games });
 
