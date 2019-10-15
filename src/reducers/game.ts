@@ -9,27 +9,31 @@ export const gameReducer: Reducer<GameState, GameAction> = (
   action
 ) => {
   switch (action.type) {
-    case CREATE_GAME:
+    case CREATE_GAME: {
+      const { userName, gameSize } = action.payload;
       return [
         ...state,
         {
           id: state.length + 1,
-          owner: action.payload,
+          owner: userName,
           opponent: "",
-          size: 3,
+          size: gameSize,
           duration: 0,
           result: "",
           state: "ready",
-          field: []
+          field: new Array(gameSize * gameSize).fill(""),
+          turn: "owner"
         }
       ];
-    case JOIN_GAME:
+    }
+    case JOIN_GAME: {
       const { userName, gameId } = action.payload;
       const index = +gameId - 1;
       return state
         .slice(0, index)
         .concat({ ...state[index], opponent: userName, state: "playing" })
         .concat(state.slice(index + 1, state.length));
+    }
     default:
       return state;
   }

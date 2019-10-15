@@ -7,7 +7,7 @@ import { bindActionCreators } from "redux";
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<AppState, undefined, GameAction>
-) => bindActionCreators({ onClick: createGame }, dispatch);
+) => bindActionCreators({ onCreate: createGame }, dispatch);
 
 const CreateGameButtonContainer = connect(
   null,

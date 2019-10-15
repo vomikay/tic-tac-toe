@@ -4,12 +4,12 @@ import { Fab } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 
 type Props = {
-  onClick: () => void;
+  onCreate: (size?: number) => void;
 };
 
-const CreateGameButton: React.FC<Props> = ({ onClick }) => {
+const CreateGameButton: React.FC<Props> = ({ onCreate }) => {
   return (
-    <Fab className="add-game" onClick={() => onClick()}>
+    <Fab className="create-game" onClick={() => onCreate()}>
       <Add fontSize="large" />
     </Fab>
   );

@@ -1,8 +1,10 @@
-type GameResult = "" | "owner" | "opponent" | "draw";
-type GameState = "ready" | "playing" | "done";
-type Field = string[];
+export type GameResult = "" | "owner" | "opponent" | "draw";
+export type GameState = "ready" | "playing" | "done";
+export type GameFieldValue = "" | "X" | "O";
+export type GameField = GameFieldValue[];
+export type GameTurn = "owner" | "opponent";
 
-interface Game {
+export interface Game {
   id: number;
   owner: string;
   opponent: string;
@@ -10,7 +12,6 @@ interface Game {
   duration: number;
   result: GameResult;
   state: GameState;
-  field: Field;
+  field: GameField;
+  turn: GameTurn;
 }
-
-export default Game;
