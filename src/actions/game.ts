@@ -2,6 +2,7 @@ import { Action, ActionCreator } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { AppState } from "../store";
 import { push, RouterAction } from "connected-react-router";
+import { calculateWinner } from "../utils/game";
 
 const DEFAULT_GAME_SIZE = 3;
 
@@ -59,8 +60,18 @@ export const doStep: ActionCreator<
     const { user, games } = getState();
     const game = games[gameId - 1];
     const { name: userName } = user;
-    if (game.state === "playing" && userName === game[game.turn]) {
+    if (
+      game.state === "playing" &&
+      userName === game[game.turn] &&
+      !game.field[row - 1][column - 1]
+    ) {
       dispatch({ type: DO_STEP, payload: { gameId, row, column } });
+      const { games } = getState();
+      const game = games[gameId - 1];
+      const winner = calculateWinner(game.owner, game.opponent, game.field);
+      if (winner) {
+        console.log(winner);
+      }
     }
   };
 };
