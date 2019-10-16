@@ -10,7 +10,7 @@ const App: React.FC = () => {
     <ConnectedRouter history={history}>
       <Switch>
         <Route exact path="/" component={HomeLayout} />
-        <Route path="/game/:id" component={GameLayoutContainer} />
+        <Route path="/game/:gameId" component={GameLayoutContainer} />
       </Switch>
     </ConnectedRouter>
   );
