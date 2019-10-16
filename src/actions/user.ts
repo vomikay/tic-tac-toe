@@ -10,7 +10,4 @@ export type UserAction = InputUserNameAction;
 
 export const inputUserName: ActionCreator<InputUserNameAction> = (
   name: string
-) => ({
-  type: INPUT_USER_NAME,
-  payload: name
-});
+) => ({ type: INPUT_USER_NAME, payload: name });

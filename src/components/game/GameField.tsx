@@ -12,16 +12,20 @@ type Props = {
 const GameField: React.FC<Props> = ({ gameId, field, size }) => {
   return (
     <GridList cols={size} spacing={0}>
-      {field.map((value, i) => (
-        <GridListTile key={i} style={{ height: "auto" }}>
-          <GameSquareContainer
-            gameId={gameId}
-            value={value}
-            row={Math.floor(i / size) + 1}
-            column={(i % size) + 1}
-          />
-        </GridListTile>
-      ))}
+      {field.map((row, i) =>
+        row.map((value, j) => {
+          return (
+            <GridListTile key={`${i}${j}`} style={{ height: "auto" }}>
+              <GameSquareContainer
+                gameId={gameId}
+                value={value}
+                row={i + 1}
+                column={j + 1}
+              />
+            </GridListTile>
+          );
+        })
+      )}
     </GridList>
   );
 };

@@ -25,12 +25,13 @@ export type GameAction = CreateGameAction | JoinGameAction | DoStepAction;
 
 export const createGame: ActionCreator<
   ThunkAction<void, AppState, undefined, CreateGameAction | RouterAction>
-> = (size = DEFAULT_GAME_SIZE) => {
+> = (gameSize = DEFAULT_GAME_SIZE) => {
   return (dispatch, getState) => {
-    const { name: userName } = getState().user;
+    const { user } = getState();
+    const { name: userName } = user;
     if (userName) {
-      dispatch({ type: CREATE_GAME, payload: { userName, gameSize: size } });
-      const games = getState().games;
+      dispatch({ type: CREATE_GAME, payload: { userName, gameSize } });
+      const { games } = getState();
       const { id } = games[games.length - 1];
       dispatch(push(`/game/${id}`));
     }
@@ -39,13 +40,14 @@ export const createGame: ActionCreator<
 
 export const joinGame: ActionCreator<
   ThunkAction<void, AppState, undefined, JoinGameAction | RouterAction>
-> = (id: number) => {
+> = (gameId: number) => {
   return (dispatch, getState) => {
-    const { name: userName } = getState().user;
-    const game = getState().games[id - 1];
-    if (userName && userName !== game.owner && game.state === "ready") {
-      dispatch({ type: JOIN_GAME, payload: { userName, gameId: id } });
-      dispatch(push(`/game/${id}`));
+    const { user, games } = getState();
+    const { name: userName } = user;
+    const game = games[gameId - 1];
+    if (game.state === "ready" && userName !== game.owner) {
+      dispatch({ type: JOIN_GAME, payload: { userName, gameId } });
+      dispatch(push(`/game/${gameId}`));
     }
   };
 };

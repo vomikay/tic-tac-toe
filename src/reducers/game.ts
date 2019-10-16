@@ -21,7 +21,7 @@ export const gameReducer: Reducer<GameState, GameAction> = (
           duration: 0,
           result: "",
           state: "ready",
-          field: new Array(gameSize * gameSize).fill(""),
+          field: new Array(gameSize).fill(new Array(gameSize).fill("")),
           turn: "owner"
         }
       ];
@@ -32,18 +32,23 @@ export const gameReducer: Reducer<GameState, GameAction> = (
       return state
         .slice(0, index)
         .concat({ ...state[index], opponent: userName, state: "playing" })
-        .concat(state.slice(index + 1, state.length));
+        .concat(state.slice(index + 1));
     }
     case DO_STEP: {
       const { gameId, row, column } = action.payload;
       const gameIndex = gameId - 1;
       const game = state[gameIndex];
-      const { field, size } = state[gameIndex];
-      const stepIndex = (row - 1) * size + (column - 1);
-      const newField = field
-        .slice(0, stepIndex)
+      const { field } = game;
+      const rowIndex = row - 1;
+      const columnIndex = column - 1;
+      const newRow = field[rowIndex]
+        .slice(0, columnIndex)
         .concat(game.turn === "owner" ? "X" : "O")
-        .concat(field.slice(stepIndex + 1, field.length));
+        .concat(field[rowIndex].slice(columnIndex + 1));
+      const newField = field
+        .slice(0, rowIndex)
+        .concat([newRow])
+        .concat(field.slice(rowIndex + 1));
       return state
         .slice(0, gameIndex)
         .concat({
@@ -51,7 +56,7 @@ export const gameReducer: Reducer<GameState, GameAction> = (
           field: newField,
           turn: game.turn === "owner" ? "opponent" : "owner"
         })
-        .concat(state.slice(gameIndex + 1, state.length));
+        .concat(state.slice(gameIndex + 1));
     }
     default:
       return state;
