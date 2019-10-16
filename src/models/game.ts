@@ -1,8 +1,9 @@
-export type GameResult = "" | "owner" | "opponent" | "draw";
+export type GameRole = "owner" | "opponent";
+export type GameResult = "" | "draw" | GameRole;
 export type GameState = "ready" | "playing" | "done";
 export type GameFieldValue = "" | "X" | "O";
 export type GameField = GameFieldValue[][];
-export type GameTurn = "owner" | "opponent";
+export type GameTurn = GameRole;
 
 export interface Game {
   id: number;

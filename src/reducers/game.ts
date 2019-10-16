@@ -1,6 +1,12 @@
 import { GameState } from "../store/types";
 import { Reducer } from "redux";
-import { GameAction, CREATE_GAME, JOIN_GAME, DO_STEP } from "../actions/game";
+import {
+  GameAction,
+  CREATE_GAME,
+  JOIN_GAME,
+  DO_STEP,
+  COMPLETE_GAME
+} from "../actions/game";
 
 const initialState: GameState = [];
 
@@ -57,6 +63,14 @@ export const gameReducer: Reducer<GameState, GameAction> = (
           turn: game.turn === "owner" ? "opponent" : "owner"
         })
         .concat(state.slice(gameIndex + 1));
+    }
+    case COMPLETE_GAME: {
+      const { gameId, gameResult } = action.payload;
+      const index = gameId - 1;
+      return state
+        .slice(0, index)
+        .concat({ ...state[index], state: "done", result: gameResult })
+        .concat(state.slice(index + 1));
     }
     default:
       return state;

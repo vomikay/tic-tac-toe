@@ -2,13 +2,15 @@ import { Action, ActionCreator } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { AppState } from "../store";
 import { push, RouterAction } from "connected-react-router";
-import { calculateWinner } from "../utils/game";
+import { calculateResult } from "../utils/game";
+import { GameResult } from "../models/game";
 
 const DEFAULT_GAME_SIZE = 3;
 
 export const CREATE_GAME = "CREATE_GAME";
 export const JOIN_GAME = "JOIN_GAME";
 export const DO_STEP = "DO_STEP";
+export const COMPLETE_GAME = "COMPLETE_GAME";
 
 interface CreateGameAction extends Action<typeof CREATE_GAME> {
   payload: { userName: string; gameSize: number };
@@ -22,7 +24,15 @@ interface DoStepAction extends Action<typeof DO_STEP> {
   payload: { gameId: number; row: number; column: number };
 }
 
-export type GameAction = CreateGameAction | JoinGameAction | DoStepAction;
+interface CompleteGameAction extends Action<typeof COMPLETE_GAME> {
+  payload: { gameId: number; gameResult: GameResult };
+}
+
+export type GameAction =
+  | CreateGameAction
+  | JoinGameAction
+  | DoStepAction
+  | CompleteGameAction;
 
 export const createGame: ActionCreator<
   ThunkAction<void, AppState, undefined, CreateGameAction | RouterAction>
@@ -54,7 +64,7 @@ export const joinGame: ActionCreator<
 };
 
 export const doStep: ActionCreator<
-  ThunkAction<void, AppState, undefined, DoStepAction>
+  ThunkAction<void, AppState, undefined, DoStepAction | CompleteGameAction>
 > = (gameId: number, row: number, column: number) => {
   return (dispatch, getState) => {
     const { user, games } = getState();
@@ -68,9 +78,9 @@ export const doStep: ActionCreator<
       dispatch({ type: DO_STEP, payload: { gameId, row, column } });
       const { games } = getState();
       const game = games[gameId - 1];
-      const winner = calculateWinner(game.owner, game.opponent, game.field);
-      if (winner) {
-        console.log(winner);
+      const gameResult = calculateResult("owner", "opponent", game.field);
+      if (gameResult !== "") {
+        dispatch({ type: COMPLETE_GAME, payload: { gameId, gameResult } });
       }
     }
   };
