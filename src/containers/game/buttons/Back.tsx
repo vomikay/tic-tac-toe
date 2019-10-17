@@ -1,14 +1,23 @@
 import React from "react";
 import { Button } from "@material-ui/core";
 import useStyles from "./Button.styles";
+import { goBack } from "connected-react-router";
+import { connect } from "react-redux";
 
-const Back: React.FC = () => {
+type Props = {
+  onBack: () => void;
+};
+
+const Back: React.FC<Props> = ({ onBack }) => {
   const classes = useStyles();
   return (
-    <Button className={classes.root} variant="contained">
+    <Button className={classes.root} onClick={onBack} variant="contained">
       Back
     </Button>
   );
 };
 
-export default Back;
+export default connect(
+  null,
+  { onBack: goBack }
+)(Back);
