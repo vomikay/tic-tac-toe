@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 import GameField from "../../components/game/GameField";
 import Timer from "../../components/game/Timer";
 import useStyles from "./Game.styles";
+import Back from "./buttons/Back";
+import Surrender from "./buttons/Surrender";
 
 type Props = {
   game: IGame;
@@ -13,12 +15,16 @@ type Props = {
 
 const Game: React.FC<Props> = ({ game }) => {
   const classes = useStyles();
-  const { duration } = game;
+  const { state, duration } = game;
   return (
     <Layout>
       <GameField {...game} />
-      <div className={classes.timeContainer}>
+      <div className={classes.container}>
         <Timer className={classes.time} milliseconds={duration} variant="h5" />
+      </div>
+      <div className={classes.container}>
+        {state === "done" && <Back />}
+        {state === "playing" && <Surrender />}
       </div>
     </Layout>
   );
