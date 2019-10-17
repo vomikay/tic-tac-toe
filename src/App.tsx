@@ -1,18 +1,16 @@
 import React from "react";
-import HomeLayout from "./components/layouts/HomeLayout";
-import { ConnectedRouter } from "connected-react-router";
-import { history } from "./store";
 import { Switch, Route } from "react-router";
-import GameLayoutContainer from "./containers/layouts/GameLayoutContainer";
+import Home from "./containers/home/Home";
+import Game from "./containers/game/Game";
+import NotFound from "./components/layout/NotFound";
 
 const App: React.FC = () => {
   return (
-    <ConnectedRouter history={history}>
-      <Switch>
-        <Route exact path="/" component={HomeLayout} />
-        <Route path="/game/:gameId" component={GameLayoutContainer} />
-      </Switch>
-    </ConnectedRouter>
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route path="/game/:id" component={Game} />
+      <Route component={NotFound} />
+    </Switch>
   );
 };
 

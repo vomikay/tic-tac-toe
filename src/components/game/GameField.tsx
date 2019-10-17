@@ -1,32 +1,33 @@
 import React from "react";
-import { GameField as Field } from "../../models/game";
-import { GridList, GridListTile } from "@material-ui/core";
-import GameSquareContainer from "../../containers/game/GameSquareContainer";
+import { Field } from "../../redux";
+import { Table, TableBody, TableRow, TableCell } from "@material-ui/core";
+import GameCellContainer from "../../containers/game/GameCellContainer";
 
 type Props = {
-  gameId: number;
+  id: number;
   field: Field;
-  size: number;
 };
 
-const GameField: React.FC<Props> = ({ gameId, field, size }) => {
+const GameField: React.FC<Props> = ({ id, field }) => {
   return (
-    <GridList cols={size} spacing={0}>
-      {field.map((row, i) =>
-        row.map((value, j) => {
-          return (
-            <GridListTile key={`${i}${j}`} style={{ height: "auto" }}>
-              <GameSquareContainer
-                gameId={gameId}
-                value={value}
-                row={i + 1}
-                column={j + 1}
-              />
-            </GridListTile>
-          );
-        })
-      )}
-    </GridList>
+    <Table>
+      <TableBody>
+        {field.map((row, i) => (
+          <TableRow key={i}>
+            {row.map((value, j) => (
+              <TableCell key={`${i}-${j}`}>
+                <GameCellContainer
+                  id={id}
+                  value={value}
+                  row={i + 1}
+                  column={j + 1}
+                />
+              </TableCell>
+            ))}
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   );
 };
 

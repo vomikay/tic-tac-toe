@@ -1,21 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import createStore from "./store";
+import { configureStore } from "./redux";
+import { StylesProvider } from "@material-ui/core";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+import { ConnectedRouter } from "connected-react-router";
+import { createBrowserHistory } from "history";
 import App from "./App";
-import { StylesProvider } from "@material-ui/core";
+import "./index.css";
 
-const { store, persistor } = createStore();
+const history = createBrowserHistory();
+const { store, persistor } = configureStore(history);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <StylesProvider injectFirst>
-        <App />
-      </StylesProvider>
-    </PersistGate>
-  </Provider>,
+  <StylesProvider injectFirst>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <ConnectedRouter history={history}>
+          <App />
+        </ConnectedRouter>
+      </PersistGate>
+    </Provider>
+  </StylesProvider>,
   document.getElementById("root")
 );
