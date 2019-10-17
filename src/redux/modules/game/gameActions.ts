@@ -102,3 +102,9 @@ export const updateTimer: ActionCreator<
       })
       .then(() => dispatch(updateTimer(gameId)));
 };
+
+export const surrender: ActionCreator<
+  ThunkAction<void, IState, undefined, CompleteAction>
+> = (gameId: number) => {
+  return (dispatch, getState) => dispatch(complete(gameId, "opponent"));
+};

@@ -15,7 +15,7 @@ type Props = {
 
 const Game: React.FC<Props> = ({ game }) => {
   const classes = useStyles();
-  const { state, duration } = game;
+  const { id, state, duration } = game;
   return (
     <Layout>
       <GameField {...game} />
@@ -24,7 +24,7 @@ const Game: React.FC<Props> = ({ game }) => {
       </div>
       <div className={classes.container}>
         {state === "done" && <Back />}
-        {state === "playing" && <Surrender />}
+        {state === "playing" && <Surrender gameId={id} />}
       </div>
     </Layout>
   );
