@@ -5,7 +5,8 @@ export default makeStyles({
     position: "relative",
     width: 411,
     height: 731,
-    margin: "0 auto"
+    margin: "0 auto",
+    backgroundColor: "#eee"
   },
   header: {
     flexGrow: 1,
@@ -17,6 +18,6 @@ export default makeStyles({
     color: "#fff"
   },
   content: {
-    padding: "5px 24px"
+    padding: "10px 24px"
   }
 });

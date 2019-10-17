@@ -21,4 +21,6 @@ const GameCardList: React.FC<Props> = ({ games }) => {
   );
 };
 
-export default connect(({ games }: IState) => ({ games }))(GameCardList);
+const mapStateToProps = ({ games }: IState) => ({ games });
+
+export default connect(mapStateToProps)(GameCardList);
