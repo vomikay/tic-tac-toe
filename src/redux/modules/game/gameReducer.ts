@@ -2,7 +2,16 @@ import { Reducer } from "redux";
 import IGamesState from "../../interfaces/IGamesState";
 import GameAction from "./GameAction";
 import IGame from "../../interfaces/IGame";
-import { CREATE, JOIN, DO_STEP, COMPLETE } from "./gameActions";
+import {
+  CREATE,
+  JOIN,
+  DO_STEP,
+  COMPLETE,
+  UPDATE_TIMER,
+  TIMER_DELAY_TIME
+} from "./gameActions";
+
+const TIMER = 5 * 60 * 1000;
 
 const initialState: IGame[] = [];
 
@@ -20,7 +29,7 @@ const gameReducer: Reducer<IGamesState, GameAction> = (
           owner: userName,
           opponent: "",
           size: gameSize,
-          duration: 0,
+          duration: TIMER,
           result: "",
           state: "ready",
           nextTurn: "owner",
@@ -66,6 +75,17 @@ const gameReducer: Reducer<IGamesState, GameAction> = (
       return state
         .slice(0, index)
         .concat({ ...state[index], state: "done", result: gameResult })
+        .concat(state.slice(index + 1));
+    }
+    case UPDATE_TIMER: {
+      const { gameId } = action.payload;
+      const index = gameId - 1;
+      return state
+        .slice(0, index)
+        .concat({
+          ...state[index],
+          duration: state[index].duration - TIMER_DELAY_TIME
+        })
         .concat(state.slice(index + 1));
     }
     default:

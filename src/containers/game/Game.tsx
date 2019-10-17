@@ -13,6 +13,7 @@ const Game: React.FC<Props> = ({ game }) => {
   return (
     <Layout>
       <GameField {...game} />
+      <p>{game.duration}</p>
     </Layout>
   );
 };

@@ -7,11 +7,19 @@ import { createLogger } from "redux-logger";
 import { persistReducer, persistStore } from "redux-persist";
 import rootReducer from "./rootReducer";
 import { createStore, applyMiddleware } from "redux";
-import { CREATE, JOIN, DO_STEP, COMPLETE } from "./modules/game/gameActions";
+import {
+  CREATE,
+  JOIN,
+  DO_STEP,
+  COMPLETE,
+  UPDATE_TIMER
+} from "./modules/game/gameActions";
 
 export default (history: History) => {
   const persistConfig = { key: "root", storage, whitelist: ["games"] };
-  const syncConfig = { whitelist: [CREATE, JOIN, DO_STEP, COMPLETE] };
+  const syncConfig = {
+    whitelist: [CREATE, JOIN, DO_STEP, COMPLETE, UPDATE_TIMER]
+  };
   const middlewares = [
     thunk,
     routerMiddleware(history),
