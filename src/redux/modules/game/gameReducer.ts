@@ -11,8 +11,6 @@ import {
   TIMER_DELAY_TIME
 } from "./gameActions";
 
-const TIMER = 5 * 60 * 1000;
-
 const initialState: IGame[] = [];
 
 const gameReducer: Reducer<IGamesState, GameAction> = (
@@ -29,7 +27,7 @@ const gameReducer: Reducer<IGamesState, GameAction> = (
           owner: userName,
           opponent: "",
           size: gameSize,
-          duration: TIMER,
+          duration: 0,
           result: "",
           state: "ready",
           nextTurn: "owner",
@@ -84,7 +82,7 @@ const gameReducer: Reducer<IGamesState, GameAction> = (
         .slice(0, index)
         .concat({
           ...state[index],
-          duration: state[index].duration - TIMER_DELAY_TIME
+          duration: state[index].duration + TIMER_DELAY_TIME
         })
         .concat(state.slice(index + 1));
     }

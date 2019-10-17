@@ -7,7 +7,7 @@ import { calculateResult } from "./gameUtils";
 import { delay } from "q";
 
 export const DEFAULT_GAME_SIZE = 3;
-export const TIMER_DELAY_TIME = 2 * 1000;
+export const TIMER_DELAY_TIME = 2 * 1000; // 2 sec
 
 export const CREATE = "@game/CREATE";
 export const JOIN = "@game/JOIN";
@@ -96,24 +96,14 @@ export const doStep: ActionCreator<
 export const updateTimer: ActionCreator<
   ThunkAction<void, IState, undefined, UpdateTimerAction | CompleteAction>
 > = (gameId: number) => {
-  return (dispatch, getState) => {
-    const { games } = getState();
-    const { state } = games[gameId - 1];
-    if (state === "playing") {
-      delay(TIMER_DELAY_TIME)
-        .then(() => dispatch({ type: UPDATE_TIMER, payload: { gameId } }))
-        .then(() => {
-          const { games } = getState();
-          const { duration } = games[gameId - 1];
-          if (duration) {
-            dispatch(updateTimer(gameId));
-          } else {
-            dispatch({
-              type: COMPLETE,
-              payload: { gameId, gameResult: "draw" }
-            });
-          }
-        });
-    }
-  };
+  return (dispatch, getState) =>
+    delay(TIMER_DELAY_TIME)
+      .then(() => {
+        const { games } = getState();
+        const { state } = games[gameId - 1];
+        if (state === "playing") {
+          dispatch({ type: UPDATE_TIMER, payload: { gameId } });
+        }
+      })
+      .then(() => dispatch(updateTimer(gameId)));
 };
