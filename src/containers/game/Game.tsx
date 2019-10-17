@@ -4,16 +4,22 @@ import { RouteComponentProps } from "react-router";
 import { IState, IGame } from "../../redux";
 import { connect } from "react-redux";
 import GameField from "../../components/game/GameField";
+import Timer from "../../components/game/Timer";
+import useStyles from "./Game.styles";
 
 type Props = {
   game: IGame;
 };
 
 const Game: React.FC<Props> = ({ game }) => {
+  const classes = useStyles();
+  const { duration } = game;
   return (
     <Layout>
       <GameField {...game} />
-      <p>{game.duration}</p>
+      <div className={classes.timeContainer}>
+        <Timer className={classes.time} variant="h5" milliseconds={duration} />
+      </div>
     </Layout>
   );
 };
