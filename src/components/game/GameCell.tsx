@@ -9,10 +9,10 @@ type Props = {
 };
 
 const GameCell: React.FC<Props> = ({ value, onClick }) => {
-  const classes = useStyles();
+  const classes = useStyles({ value });
   return (
     <button className={classes.root} type="button" onClick={onClick}>
-      <Typography variant="h6" component="span">
+      <Typography variant="h2" component="span">
         {value}
       </Typography>
     </button>

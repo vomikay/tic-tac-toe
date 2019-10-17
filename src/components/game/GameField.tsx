@@ -2,6 +2,7 @@ import React from "react";
 import { Field } from "../../redux";
 import { Table, TableBody, TableRow, TableCell } from "@material-ui/core";
 import GameCellContainer from "../../containers/game/GameCellContainer";
+import useStyles from "./GameField.styles";
 
 type Props = {
   id: number;
@@ -9,13 +10,14 @@ type Props = {
 };
 
 const GameField: React.FC<Props> = ({ id, field }) => {
+  const classes = useStyles();
   return (
-    <Table>
+    <Table className={classes.root}>
       <TableBody>
         {field.map((row, i) => (
-          <TableRow key={i}>
+          <TableRow className={classes.row} key={i}>
             {row.map((value, j) => (
-              <TableCell key={`${i}-${j}`}>
+              <TableCell className={classes.cell} key={`${i}-${j}`}>
                 <GameCellContainer
                   id={id}
                   value={value}
