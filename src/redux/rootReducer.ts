@@ -7,7 +7,7 @@ import { connectRouter } from "connected-react-router";
 const rootReducer = (history: History) =>
   combineReducers({
     games: gameReducer,
-    user: userReducer,
+    userName: userReducer,
     router: connectRouter(history)
   });
 export default rootReducer;

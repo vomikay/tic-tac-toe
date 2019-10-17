@@ -1,8 +1,9 @@
 import { connect } from "react-redux";
-import { IState, State, Result, GameAction, join } from "../../redux";
+import { IState, State, Result, GameAction } from "../../redux";
 import { ThunkDispatch } from "redux-thunk";
 import { bindActionCreators } from "redux";
 import GameCard from "../../components/home/GameCard";
+import { push } from "connected-react-router";
 
 type Props = {
   id: number;
@@ -20,7 +21,7 @@ const mapStateToProps = (state: IState, ownProps: Props) => ({
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<IState, undefined, GameAction>,
   { id }: Props
-) => bindActionCreators({ onJoin: () => join(id) }, dispatch);
+) => bindActionCreators({ onJoin: () => push(`game/${id}`) }, dispatch);
 
 export default connect(
   mapStateToProps,

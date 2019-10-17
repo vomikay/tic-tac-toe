@@ -1,7 +1,6 @@
 import { Action, ActionCreator } from "redux";
 import { Result } from "../../interfaces/IGame";
 import { ThunkAction } from "redux-thunk";
-import { RouterAction, push } from "connected-react-router";
 import IState from "../../interfaces/IState";
 import { calculateResult } from "./gameUtils";
 import { delay } from "q";
@@ -10,17 +9,12 @@ export const DEFAULT_GAME_SIZE = 3;
 export const TIMER_DELAY_TIME = 2 * 1000; // 2 sec
 
 export const CREATE = "@game/CREATE";
-export const JOIN = "@game/JOIN";
 export const DO_STEP = "@game/DO_STEP";
 export const COMPLETE = "@game/COMPLETE";
 export const UPDATE_TIMER = "@game/UPDATE_TIMER";
 
 export interface CreateAction extends Action<typeof CREATE> {
   payload: { userName: string; gameSize: number };
-}
-
-export interface JoinAction extends Action<typeof JOIN> {
-  payload: { userName: string; gameId: number };
 }
 
 export interface DoStepAction extends Action<typeof DO_STEP> {
@@ -36,59 +30,60 @@ export interface UpdateTimerAction extends Action<typeof UPDATE_TIMER> {
 }
 
 export const create: ActionCreator<
-  ThunkAction<void, IState, undefined, CreateAction | RouterAction>
+  ThunkAction<void, IState, undefined, CreateAction | UpdateTimerAction>
 > = (gameSize = DEFAULT_GAME_SIZE) => {
   return (dispatch, getState) => {
-    const { user } = getState();
-    const { name: userName } = user;
+    const { userName } = getState();
     if (userName) {
       dispatch({ type: CREATE, payload: { userName, gameSize } });
       const { games } = getState();
-      const { id } = games[games.length - 1];
-      dispatch(push(`/game/${id}`));
+      dispatch(updateTimer(games.length));
     }
   };
 };
 
-export const join: ActionCreator<
-  ThunkAction<
-    void,
-    IState,
-    undefined,
-    JoinAction | RouterAction | UpdateTimerAction
-  >
-> = (gameId: number) => {
-  return (dispatch, getState) => {
-    const { user, games } = getState();
-    const { name: userName } = user;
-    const game = games[gameId - 1];
-    if (game.state === "ready" && userName !== game.owner) {
-      dispatch({ type: JOIN, payload: { userName, gameId } });
-      dispatch(push(`/game/${gameId}`));
-      dispatch(updateTimer(gameId));
-    }
-  };
-};
+export const complete: ActionCreator<CompleteAction> = (
+  gameId: number,
+  gameResult: Result
+) => ({
+  type: COMPLETE,
+  payload: { gameId, gameResult }
+});
 
 export const doStep: ActionCreator<
   ThunkAction<void, IState, undefined, DoStepAction | CompleteAction>
-> = (gameId: number, row: number, column: number) => {
+> = (gameId: number, row: number, column: number, isBot = false) => {
   return (dispatch, getState) => {
-    const { user, games } = getState();
+    const { games } = getState();
     const game = games[gameId - 1];
-    const { name: userName } = user;
-    if (
-      game.state === "playing" &&
-      userName === game[game.nextTurn] &&
-      !game.field[row - 1][column - 1]
-    ) {
+    if (game.state === "playing" && !game.field[row - 1][column - 1]) {
       dispatch({ type: DO_STEP, payload: { gameId, row, column } });
       const { games } = getState();
       const game = games[gameId - 1];
       const gameResult = calculateResult("owner", "opponent", game.field);
       if (gameResult !== "") {
-        dispatch({ type: COMPLETE, payload: { gameId, gameResult } });
+        dispatch(complete(gameId, gameResult));
       }
+      if (game.state === "playing" && !isBot) {
+        dispatch(doStepBot(gameId));
+      }
+    }
+  };
+};
+
+export const doStepBot: ActionCreator<
+  ThunkAction<void, IState, undefined, DoStepAction | CompleteAction>
+> = (gameId: number) => {
+  return (dispatch, getState) => {
+    const { games } = getState();
+    const { field, size } = games[gameId - 1];
+    if (!field.every(row => row.every(value => value !== ""))) {
+      let row, column;
+      do {
+        row = Math.floor(Math.random() * size) + 1;
+        column = Math.floor(Math.random() * size) + 1;
+      } while (field[row - 1][column - 1] !== "");
+      dispatch(doStep(gameId, row, column, true));
     }
   };
 };

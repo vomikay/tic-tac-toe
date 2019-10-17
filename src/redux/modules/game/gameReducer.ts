@@ -1,10 +1,8 @@
 import { Reducer } from "redux";
-import IGamesState from "../../interfaces/IGamesState";
 import GameAction from "./GameAction";
 import IGame from "../../interfaces/IGame";
 import {
   CREATE,
-  JOIN,
   DO_STEP,
   COMPLETE,
   UPDATE_TIMER,
@@ -13,7 +11,7 @@ import {
 
 const initialState: IGame[] = [];
 
-const gameReducer: Reducer<IGamesState, GameAction> = (
+const gameReducer: Reducer<IGame[], GameAction> = (
   state = initialState,
   action
 ) => {
@@ -25,23 +23,15 @@ const gameReducer: Reducer<IGamesState, GameAction> = (
         {
           id: state.length + 1,
           owner: userName,
-          opponent: "",
+          opponent: "Bot",
           size: gameSize,
           duration: 0,
           result: "",
-          state: "ready",
+          state: "playing",
           nextTurn: "owner",
           field: new Array(gameSize).fill(new Array(gameSize).fill(""))
         }
       ];
-    }
-    case JOIN: {
-      const { userName, gameId } = action.payload;
-      const index = gameId - 1;
-      return state
-        .slice(0, index)
-        .concat({ ...state[index], opponent: userName, state: "playing" })
-        .concat(state.slice(index + 1));
     }
     case DO_STEP: {
       const { gameId, row, column } = action.payload;

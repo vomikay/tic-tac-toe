@@ -1,6 +1,5 @@
 import {
   CreateAction,
-  JoinAction,
   DoStepAction,
   CompleteAction,
   UpdateTimerAction
@@ -8,7 +7,6 @@ import {
 
 type GameAction =
   | CreateAction
-  | JoinAction
   | DoStepAction
   | CompleteAction
   | UpdateTimerAction;

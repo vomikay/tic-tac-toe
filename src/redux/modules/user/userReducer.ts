@@ -1,19 +1,18 @@
-import IUserState from "../../interfaces/IUserState";
 import { Reducer } from "redux";
 import UserAction from "./UserAction";
 import { INPUT_NAME } from "./userActions";
 
-const initialState: IUserState = {
-  name: ""
-};
+const initialState = "";
 
-const userReducer: Reducer<IUserState, UserAction> = (
+const userReducer: Reducer<string, UserAction> = (
   state = initialState,
   action
 ) => {
   switch (action.type) {
-    case INPUT_NAME:
-      return { name: action.payload };
+    case INPUT_NAME: {
+      const { userName } = action.payload;
+      return userName;
+    }
     default:
       return state;
   }

@@ -24,7 +24,7 @@ const NameInput: React.FC<Props> = ({ value, onInput }) => {
 
 export default connect(
   (state: IState) => ({
-    value: state.user.name
+    value: state.userName
   }),
   { onInput: inputName }
 )(NameInput);
