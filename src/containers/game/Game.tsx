@@ -18,7 +18,7 @@ const Game: React.FC<Props> = ({ game }) => {
     <Layout>
       <GameField {...game} />
       <div className={classes.timeContainer}>
-        <Timer className={classes.time} variant="h5" milliseconds={duration} />
+        <Timer className={classes.time} milliseconds={duration} variant="h5" />
       </div>
     </Layout>
   );
@@ -28,10 +28,7 @@ type OwnProps = RouteComponentProps<{ id: string }>;
 
 const mapStateToProps = (state: IState, { match }: OwnProps) => {
   const { games } = state;
-  const game = games.find(game => game.id === +match.params.id);
-  if (!game) {
-    throw new Error("Incorrect game id");
-  }
+  const game = games[+match.params.id - 1];
   return { game };
 };
 

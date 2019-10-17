@@ -10,6 +10,7 @@ type Props = {
   opponent: string;
   state: State;
   result: Result;
+  duration: number;
 };
 
 const mapStateToProps = (state: IState, ownProps: Props) => ({
