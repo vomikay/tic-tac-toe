@@ -1,9 +1,13 @@
 import { makeStyles } from "@material-ui/styles";
 import { FieldValue } from "../../redux";
 
-export default makeStyles<undefined, { value: FieldValue }>({
+type Props = {
+  value: FieldValue;
+};
+
+export default makeStyles<undefined, Props>({
   root: {
-    backgroundColor: "#fff",
+    backgroundColor: "transparent",
     height: 116,
     width: 116,
     padding: 10,

@@ -10,12 +10,13 @@ type Props = {
   onJoin: () => void;
 };
 
-const GameCard: React.FC<Props> = ({ owner, opponent, onJoin }) => {
-  const classes = useStyles();
+const GameCard: React.FC<Props> = props => {
+  const { owner, opponent, onJoin } = props;
+  const classes = useStyles({ ...props });
   return (
     <button className={classes.root} type="button" onClick={onJoin}>
-      <p>{owner}</p>
-      <p>{opponent}</p>
+      <p className={classes.owner}>{owner}</p>
+      <p className={classes.opponent}>{opponent}</p>
     </button>
   );
 };
