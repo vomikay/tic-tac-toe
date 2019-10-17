@@ -13,6 +13,7 @@ export default makeStyles<undefined, Props>({
     padding: 10,
     border: "0 none",
     color: ({ value }) => (value === "X" ? "#bbb" : "#4395c7"),
-    "&:focus": { outline: "none" }
+    "&:focus": { outline: "none" },
+    "&:hover": { cursor: "pointer" }
   }
 });

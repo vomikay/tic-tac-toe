@@ -38,7 +38,8 @@ export default makeStyles<undefined, Props>(() => {
       backgroundColor: ({ state }) => backgrounds[state],
       height: 85,
       width: 85,
-      border: "0 none"
+      border: "0 none",
+      "&:hover": { cursor: "pointer" }
     },
     owner: {
       color: ({ state, result }) => getColor(state, result, "owner")
