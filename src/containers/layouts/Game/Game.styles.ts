@@ -6,11 +6,5 @@ export default makeStyles({
     margin: "5px 0",
     textAlign: "center"
   },
-  time: { color: "#424242" },
-  action: {
-    color: "#fff",
-    backgroundColor: "#009788",
-    width: 110,
-    height: 40
-  }
+  time: { color: "#424242" }
 });
