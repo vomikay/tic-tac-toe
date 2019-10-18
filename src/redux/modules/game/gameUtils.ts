@@ -47,16 +47,18 @@ const WIN_LINES = [
 export const calculateResult = (
   xRole: Role,
   oRole: Role,
-  gameField: Field
+  field: Field
 ): Result => {
   for (const [a, b, c] of WIN_LINES) {
     if (
-      gameField[a.rowIndex][a.colIndex] &&
-      gameField[a.rowIndex][a.colIndex] === gameField[b.rowIndex][b.colIndex] &&
-      gameField[b.rowIndex][b.colIndex] === gameField[c.rowIndex][c.colIndex]
+      field[a.rowIndex][a.colIndex] &&
+      field[a.rowIndex][a.colIndex] === field[b.rowIndex][b.colIndex] &&
+      field[b.rowIndex][b.colIndex] === field[c.rowIndex][c.colIndex]
     ) {
-      return gameField[a.rowIndex][a.colIndex] === "X" ? xRole : oRole;
+      const value = field[a.rowIndex][a.colIndex];
+      return value === "X" ? xRole : oRole;
     }
   }
-  return gameField.every(row => row.every(cell => cell !== "")) ? "draw" : "";
+  const isFull = field.every(row => row.every(cell => cell !== ""));
+  return isFull ? "draw" : "";
 };
