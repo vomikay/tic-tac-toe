@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from "react";
 import { TextField } from "@material-ui/core";
 import { connect } from "react-redux";
-import { IState, inputName } from "../../redux";
+import { IState, inputName } from "../../../redux";
 
 type Props = {
   value: string;

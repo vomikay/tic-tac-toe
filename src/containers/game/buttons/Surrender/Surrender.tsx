@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@material-ui/core";
-import useStyles from "./Button.styles";
-import { IState, GameAction, surrender } from "../../../redux";
+import useStyles from "../Button.styles";
+import { IState, GameAction, surrender } from "../../../../redux";
 import { bindActionCreators } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import { connect } from "react-redux";

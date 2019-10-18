@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router";
-import Home from "./containers/home/Home";
-import Game from "./containers/game/Game";
+import Home from "./containers/home/Home/Home";
+import Game from "./containers/game/Game/Game";
 import NotFound from "./components/layout/NotFound/NotFound";
 
 const App: React.FC = () => {

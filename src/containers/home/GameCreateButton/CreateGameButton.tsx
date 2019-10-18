@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Fab } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 import { ThunkDispatch } from "redux-thunk";
-import { IState, GameAction, create } from "../../redux";
+import { IState, GameAction, create } from "../../../redux";
 import { bindActionCreators } from "redux";
 import useStyles from "./CreateGameButton.styles";
 

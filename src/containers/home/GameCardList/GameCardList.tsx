@@ -1,8 +1,8 @@
 import React from "react";
-import { IGame, IState } from "../../redux";
+import { IGame, IState } from "../../../redux";
 import { connect } from "react-redux";
 import { GridList, GridListTile } from "@material-ui/core";
-import GameCardContainer from "./GameCardContainer";
+import GameCardContainer from "../GameCardContainer/GameCardContainer";
 
 type Props = {
   games: IGame[];
