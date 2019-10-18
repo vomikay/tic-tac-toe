@@ -2,9 +2,7 @@ import React from "react";
 import { Typography } from "@material-ui/core";
 import { TypographyProps } from "@material-ui/core/Typography";
 
-interface Props extends TypographyProps {
-  milliseconds: number;
-}
+type Props = TypographyProps & { milliseconds: number };
 
 const formatTime = (milliseconds: number) => {
   const date = new Date(milliseconds);
@@ -17,9 +15,9 @@ const formatTime = (milliseconds: number) => {
   return `${hh}:${mm}:${ss}`;
 };
 
-const Timer: React.FC<Props> = ({ milliseconds, ...rest }) => {
+const Timer: React.FC<Props> = ({ milliseconds, variant, component }) => {
   return (
-    <Typography component="span" {...rest}>
+    <Typography component={component} variant={variant}>
       {formatTime(milliseconds)}
     </Typography>
   );

@@ -9,6 +9,8 @@ export default makeStyles({
   time: { color: "#424242" },
   action: {
     color: "#fff",
-    backgroundColor: "#009788"
+    backgroundColor: "#009788",
+    width: 110,
+    height: 40
   }
 });

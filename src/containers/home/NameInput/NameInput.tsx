@@ -14,7 +14,7 @@ const NameInput: React.FC<Props> = ({ value, onInput }) => {
   };
   return (
     <TextField
-      placeholder="Введите имя"
+      placeholder="Enter your name"
       margin="normal"
       value={value}
       onChange={onChange}
@@ -23,8 +23,6 @@ const NameInput: React.FC<Props> = ({ value, onInput }) => {
 };
 
 export default connect(
-  (state: IState) => ({
-    value: state.userName
-  }),
+  ({ userName }: IState) => ({ value: userName }),
   { onInput: inputName }
 )(NameInput);

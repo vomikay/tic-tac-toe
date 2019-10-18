@@ -11,6 +11,10 @@ type Props = {
   onCreate: (size?: number) => void;
 };
 
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<IState, undefined, GameAction>
+) => bindActionCreators({ onCreate: create }, dispatch);
+
 const CreateGameButton: React.FC<Props> = ({ onCreate }) => {
   const classes = useStyles();
   const onClick = () => onCreate();
@@ -20,10 +24,6 @@ const CreateGameButton: React.FC<Props> = ({ onCreate }) => {
     </Fab>
   );
 };
-
-const mapDispatchToProps = (
-  dispatch: ThunkDispatch<IState, undefined, GameAction>
-) => bindActionCreators({ onCreate: create }, dispatch);
 
 export default connect(
   null,
