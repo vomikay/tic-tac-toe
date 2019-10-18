@@ -56,13 +56,15 @@ export const doStep: ActionCreator<
   return (dispatch, getState) => {
     const { games } = getState();
     const game = games[gameId - 1];
-    if (game.state === "playing" && !game.field[row - 1][column - 1]) {
+    const isEmpty = !game.field[row - 1][column - 1];
+    if (game.state === "playing" && isEmpty) {
       dispatch({ type: DO_STEP, payload: { gameId, row, column } });
       const { games } = getState();
       const game = games[gameId - 1];
-      const gameResult = calculateResult("owner", "opponent", game.field);
-      if (gameResult !== "") {
-        dispatch(complete(gameId, gameResult));
+      const { field } = game;
+      const result = calculateResult("owner", "opponent", field);
+      if (result !== "") {
+        dispatch(complete(gameId, result));
       }
       if (game.state === "playing" && !isBot) {
         dispatch(doStepBot(gameId));
@@ -72,12 +74,13 @@ export const doStep: ActionCreator<
 };
 
 export const doStepBot: ActionCreator<
-  ThunkAction<void, IState, undefined, DoStepAction | CompleteAction>
+  ThunkAction<void, IState, undefined, DoStepAction>
 > = (gameId: number) => {
   return (dispatch, getState) => {
     const { games } = getState();
     const { field, size } = games[gameId - 1];
-    if (!field.every(row => row.every(value => value !== ""))) {
+    const isFull = field.every(row => row.every(value => value !== ""));
+    if (!isFull) {
       let row, column;
       do {
         row = Math.floor(Math.random() * size) + 1;
@@ -89,7 +92,7 @@ export const doStepBot: ActionCreator<
 };
 
 export const updateTimer: ActionCreator<
-  ThunkAction<void, IState, undefined, UpdateTimerAction | CompleteAction>
+  ThunkAction<void, IState, undefined, UpdateTimerAction>
 > = (gameId: number) => {
   return (dispatch, getState) =>
     delay(TIMER_DELAY_TIME)
@@ -106,5 +109,5 @@ export const updateTimer: ActionCreator<
 export const surrender: ActionCreator<
   ThunkAction<void, IState, undefined, CompleteAction>
 > = (gameId: number) => {
-  return (dispatch, getState) => dispatch(complete(gameId, "opponent"));
+  return (dispatch) => dispatch(complete(gameId, "opponent"));
 };
