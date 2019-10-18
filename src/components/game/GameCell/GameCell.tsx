@@ -1,5 +1,5 @@
 import React from "react";
-import { FieldValue } from "../../redux";
+import { FieldValue } from "../../../redux";
 import { Typography } from "@material-ui/core";
 import useStyles from "./GameCell.styles";
 

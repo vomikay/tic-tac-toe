@@ -2,7 +2,7 @@ import { FieldValue, IState, GameAction, doStep } from "../../redux";
 import { ThunkDispatch } from "redux-thunk";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import GameCell from "../../components/game/GameCell";
+import GameCell from "../../components/game/GameCell/GameCell";
 
 type OwnProps = {
   id: number;

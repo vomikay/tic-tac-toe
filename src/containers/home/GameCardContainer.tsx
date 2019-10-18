@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { IState, State, Result, GameAction } from "../../redux";
 import { ThunkDispatch } from "redux-thunk";
 import { bindActionCreators } from "redux";
-import GameCard from "../../components/home/GameCard";
+import GameCard from "../../components/home/GameCard/GameCard";
 import { push } from "connected-react-router";
 
 type Props = {

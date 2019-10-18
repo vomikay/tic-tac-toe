@@ -1,7 +1,7 @@
 import React from "react";
-import { Field } from "../../redux";
+import { Field } from "../../../redux";
 import { Table, TableBody, TableRow, TableCell } from "@material-ui/core";
-import GameCellContainer from "../../containers/game/GameCellContainer";
+import GameCellContainer from "../../../containers/game/GameCellContainer";
 import useStyles from "./GameField.styles";
 
 type Props = {

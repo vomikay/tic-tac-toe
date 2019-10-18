@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
-import Layout from "./Layout";
+import Layout from "../Layout/Layout";
 
 const NotFound: React.FC = () => {
   return (

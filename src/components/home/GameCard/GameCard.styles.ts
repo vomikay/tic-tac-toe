@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/styles";
-import { State, Result, Role } from "../../redux";
+import { State, Result, Role } from "../../../redux";
 
 type Props = {
   state: State;

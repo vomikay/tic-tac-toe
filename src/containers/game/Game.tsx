@@ -1,10 +1,10 @@
 import React from "react";
-import Layout from "../../components/layout/Layout";
+import Layout from "../../components/layout/Layout/Layout";
 import { RouteComponentProps } from "react-router";
 import { IState, IGame } from "../../redux";
 import { connect } from "react-redux";
-import GameField from "../../components/game/GameField";
-import Timer from "../../components/game/Timer";
+import GameField from "../../components/game/GameField/GameField";
+import Timer from "../../components/common/Timer/Timer";
 import useStyles from "./Game.styles";
 import Back from "./buttons/Back";
 import Surrender from "./buttons/Surrender";

@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "../../components/layout/Layout";
+import Layout from "../../components/layout/Layout/Layout";
 import NameInput from "./NameInput";
 import GameCardList from "./GameCardList";
 import CreateGameButton from "./CreateGameButton";

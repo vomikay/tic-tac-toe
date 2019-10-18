@@ -1,7 +1,7 @@
 import React from "react";
 import useStyles from "./GameCard.styles";
-import { State, Result } from "../../redux";
-import Timer from "../game/Timer";
+import { State, Result } from "../../../redux";
+import Timer from "../../common/Timer/Timer";
 
 type Props = {
   owner: string;
