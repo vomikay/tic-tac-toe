@@ -1,5 +1,5 @@
-import { makeStyles } from "@material-ui/styles";
 import { FieldValue } from "../../../redux";
+import { makeStyles } from "@material-ui/core";
 
 type Props = {
   value: FieldValue;
