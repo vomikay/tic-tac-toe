@@ -7,7 +7,7 @@ const Layout: React.FC = ({ children }) => {
   return (
     <div className={classes.root}>
       <AppBar className={classes.header} position="sticky">
-        <Typography className={classes.title} variant="h6" component="h1">
+        <Typography variant="h6" component="h1">
           Tic tac toe
         </Typography>
       </AppBar>

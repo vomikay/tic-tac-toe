@@ -11,13 +11,12 @@ type Props = {
 };
 
 const GameList: React.FC<Props> = ({ games, onJoin }) => {
-  const spacing = 5;
   return (
-    <GridList cols={4} spacing={spacing} cellHeight="auto">
+    <GridList cols={4} cellHeight="auto">
       {Object.entries(games).map(([id, game]: [string, IGame]) => {
         const cardProps = { ...game, onJoin };
         return (
-          <GridListTile key={id} rows={spacing}>
+          <GridListTile key={id}>
             <GameCard {...cardProps} />
           </GridListTile>
         );

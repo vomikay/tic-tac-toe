@@ -7,16 +7,15 @@ type Props = {
 };
 
 const backgrounds = {
-  ready: "#828282",
   playing: "#bdbdbd",
   done: "#e0e0e0"
 };
 
 const colors = {
-  draw: "#4395c7",
-  winner: "#dfa776",
-  loser: "#828282",
-  default: "#fff"
+  default: "#fff",
+  draw: "#4169e1",
+  winner: "#f0ac47",
+  loser: "#828282"
 };
 
 export default makeStyles<undefined, Props>(() => {
