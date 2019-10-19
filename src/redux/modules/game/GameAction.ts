@@ -2,12 +2,14 @@ import {
   CreateAction,
   DoStepAction,
   CompleteAction,
-  UpdateTimerAction
+  UpdateTimerAction,
+  RemoveAction
 } from "./gameActions";
 
 type GameAction =
   | CreateAction
   | DoStepAction
   | CompleteAction
-  | UpdateTimerAction;
+  | UpdateTimerAction
+  | RemoveAction;
 export default GameAction;

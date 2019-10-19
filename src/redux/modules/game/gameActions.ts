@@ -6,12 +6,13 @@ import { calculateResult } from "./gameUtils";
 import { delay } from "q";
 
 export const DEFAULT_GAME_SIZE = 3;
-export const TIMER_DELAY_TIME = 2 * 1000; // 2 sec
+export const UPDATE_TIME = 2 * 1000; // 2 sec
 
 export const CREATE = "@game/CREATE";
 export const DO_STEP = "@game/DO_STEP";
 export const COMPLETE = "@game/COMPLETE";
 export const UPDATE_TIMER = "@game/UPDATE_TIMER";
+export const REMOVE = "@game/REMOVE";
 
 export interface CreateAction extends Action<typeof CREATE> {
   payload: { userName: string; gameSize: number };
@@ -26,6 +27,10 @@ export interface CompleteAction extends Action<typeof COMPLETE> {
 }
 
 export interface UpdateTimerAction extends Action<typeof UPDATE_TIMER> {
+  payload: { gameId: number; newDuration: number };
+}
+
+export interface RemoveAction extends Action<typeof REMOVE> {
   payload: { gameId: number };
 }
 
@@ -37,7 +42,10 @@ export const create: ActionCreator<
     if (userName) {
       dispatch({ type: CREATE, payload: { userName, gameSize } });
       const { games } = getState();
-      dispatch(updateTimer(Object.entries(games).length));
+      const last = Object.keys(games).pop();
+      const lastId = last ? +last : 1;
+      const { duration } = games[lastId];
+      dispatch(updateTimer(lastId, duration + UPDATE_TIME));
     }
   };
 };
@@ -93,17 +101,17 @@ export const doStepBot: ActionCreator<
 
 export const updateTimer: ActionCreator<
   ThunkAction<void, IState, undefined, UpdateTimerAction>
-> = (gameId: number) => {
+> = (gameId: number, newDuration: number) => {
   return (dispatch, getState) =>
-    delay(TIMER_DELAY_TIME)
+    delay(UPDATE_TIME)
       .then(() => {
         const { games } = getState();
         const { state } = games[gameId];
         if (state === "playing") {
-          dispatch({ type: UPDATE_TIMER, payload: { gameId } });
+          dispatch({ type: UPDATE_TIMER, payload: { gameId, newDuration } });
         }
       })
-      .then(() => dispatch(updateTimer(gameId)));
+      .then(() => dispatch(updateTimer(gameId, newDuration + UPDATE_TIME)));
 };
 
 export const surrender: ActionCreator<
@@ -111,3 +119,8 @@ export const surrender: ActionCreator<
 > = (gameId: number) => {
   return dispatch => dispatch(complete(gameId, "opponent"));
 };
+
+export const remove: ActionCreator<RemoveAction> = (gameId: number) => ({
+  type: REMOVE,
+  payload: { gameId }
+});

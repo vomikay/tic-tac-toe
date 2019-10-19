@@ -1,6 +1,6 @@
 import { Reducer } from "redux";
 import GameAction from "./GameAction";
-import { CREATE, DO_STEP, COMPLETE, UPDATE_TIMER } from "./gameActions";
+import { CREATE, DO_STEP, COMPLETE, UPDATE_TIMER, REMOVE } from "./gameActions";
 import IGameState from "../../interfaces/IGameState";
 import { FieldValue } from "../../interfaces/IGame";
 
@@ -65,13 +65,16 @@ const gameReducer: Reducer<IGameState, GameAction> = (
       };
     }
     case UPDATE_TIMER: {
-      const { gameId } = action.payload;
-      const { duration } = state[gameId];
-      const newDuration = duration + 2000;
+      const { gameId, newDuration } = action.payload;
       return {
         ...state,
         [gameId]: { ...state[gameId], duration: newDuration }
       };
+    }
+    case REMOVE: {
+      const { gameId } = action.payload;
+      const { [gameId]: removed, ...rest } = state;
+      return rest;
     }
     default:
       return state;

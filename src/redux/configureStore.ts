@@ -12,6 +12,7 @@ import {
   PERSIST,
   REHYDRATE
 } from "redux-persist";
+import gameCollector from "./middleware/gameCollector";
 
 export default (history: History) => {
   const persistConfig = { key: "root", storage, blacklist: ["router"] };
@@ -19,8 +20,9 @@ export default (history: History) => {
     blacklist: [PERSIST, REHYDRATE, LOCATION_CHANGE]
   };
   const middlewares = [
-    thunk,
+    gameCollector,
     routerMiddleware(history),
+    thunk,
     createStateSyncMiddleware(syncConfig),
     createLogger({
       predicate: () => process.env.NODE_ENV === "development",
