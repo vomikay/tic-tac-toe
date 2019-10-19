@@ -1,6 +1,6 @@
-import IGame from "./IGame";
+import IGameState from "./IGameState";
 
 export default interface IState {
   userName: string;
-  games: IGame[];
+  games: IGameState;
 }

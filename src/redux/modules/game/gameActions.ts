@@ -37,7 +37,7 @@ export const create: ActionCreator<
     if (userName) {
       dispatch({ type: CREATE, payload: { userName, gameSize } });
       const { games } = getState();
-      dispatch(updateTimer(games.length));
+      dispatch(updateTimer(Object.entries(games).length));
     }
   };
 };
@@ -55,12 +55,12 @@ export const doStep: ActionCreator<
 > = (gameId: number, row: number, column: number, isBot = false) => {
   return (dispatch, getState) => {
     const { games } = getState();
-    const game = games[gameId - 1];
+    const game = games[gameId];
     const isEmpty = !game.field[row - 1][column - 1];
     if (game.state === "playing" && isEmpty) {
       dispatch({ type: DO_STEP, payload: { gameId, row, column } });
       const { games } = getState();
-      const game = games[gameId - 1];
+      const game = games[gameId];
       const { field } = game;
       const result = calculateResult("owner", "opponent", field);
       if (result !== "") {
@@ -78,7 +78,7 @@ export const doStepBot: ActionCreator<
 > = (gameId: number) => {
   return (dispatch, getState) => {
     const { games } = getState();
-    const { field, size } = games[gameId - 1];
+    const { field, size } = games[gameId];
     const isFull = field.every(row => row.every(value => value !== ""));
     if (!isFull) {
       let row, column;
@@ -98,7 +98,7 @@ export const updateTimer: ActionCreator<
     delay(TIMER_DELAY_TIME)
       .then(() => {
         const { games } = getState();
-        const { state } = games[gameId - 1];
+        const { state } = games[gameId];
         if (state === "playing") {
           dispatch({ type: UPDATE_TIMER, payload: { gameId } });
         }
@@ -109,5 +109,5 @@ export const updateTimer: ActionCreator<
 export const surrender: ActionCreator<
   ThunkAction<void, IState, undefined, CompleteAction>
 > = (gameId: number) => {
-  return (dispatch) => dispatch(complete(gameId, "opponent"));
+  return dispatch => dispatch(complete(gameId, "opponent"));
 };

@@ -25,7 +25,7 @@ type Props = OwnProps & {
 
 const mapStateToProps = ({ games }: IState, { match }: OwnProps) => {
   const { id } = match.params;
-  const game = games[+id - 1];
+  const game = games[+id];
   const { state, field } = game;
   return { state, field };
 };
