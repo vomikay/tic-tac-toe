@@ -18,8 +18,7 @@ type Props = WithStyles<typeof styles> & {
 };
 
 type State = {
-  userName: string;
-  isValid: boolean;
+  isError: boolean;
 };
 
 const mapStateToProps = ({ userName }: IState) => ({ userName });
@@ -29,34 +28,33 @@ const mapDispatchToProps = (
 ) => bindActionCreators({ onCreate: create, onInput: inputName }, dispatch);
 
 class Home extends React.Component<Props, State> {
-  state = { userName: "", isValid: true };
+  state = { isError: false };
 
   onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     const { onInput } = this.props;
     const { value } = e.target;
-    this.setState({ userName: value, isValid: true });
+    this.setState({ isError: false });
     onInput(value);
   };
 
   onCreateGame = () => {
-    const { onCreate } = this.props;
-    const { userName } = this.state;
+    const { userName, onCreate } = this.props;
     if (userName) {
       onCreate();
     } else {
-      this.setState({ userName: "", isValid: false });
+      this.setState({ isError: true });
     }
   };
 
   render() {
     const { classes, userName } = this.props;
-    const { isValid } = this.state;
+    const { isError } = this.state;
     return (
       <Layout>
         <TextField
-          required
-          error={!isValid}
           placeholder="Enter your name"
+          required
+          error={isError}
           margin="normal"
           value={userName}
           onChange={this.onChangeInput}
