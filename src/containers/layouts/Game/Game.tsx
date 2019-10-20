@@ -1,6 +1,5 @@
 import React from "react";
 import Layout from "../Layout/Layout";
-import { RouteComponentProps } from "react-router";
 import { ThunkDispatch } from "redux-thunk";
 import {
   IState,
@@ -17,9 +16,8 @@ import Field from "../../../components/game/Field/Field";
 import Action from "../../game/Action/Action";
 import TurnBar from "../../../components/game/TurnBar/TurnBar";
 
-type OwnProps = RouteComponentProps<{ id: string }>;
-type Props = {
-  gameId: number;
+type OwnProps = { gameId: number };
+type Props = OwnProps & {
   state: State;
   field: GameField;
   owner: string;
@@ -27,19 +25,15 @@ type Props = {
   onStep: (row: number, column: number) => void;
 };
 
-const mapStateToProps = ({ games }: IState, { match }: OwnProps) => {
-  const { id } = match.params;
-  const gameId = +id;
+const mapStateToProps = ({ games }: IState, { gameId }: OwnProps) => {
   const { state, field, owner, opponent } = games[gameId];
   return { gameId, state, field, owner, opponent };
 };
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<IState, undefined, GameAction>,
-  { match }: OwnProps
+  { gameId }: OwnProps
 ) => {
-  const { id } = match.params;
-  const gameId = +id;
   return bindActionCreators(
     { onStep: (row: number, column: number) => doStep(gameId, row, column) },
     dispatch
