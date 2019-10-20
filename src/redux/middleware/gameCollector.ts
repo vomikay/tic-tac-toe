@@ -1,6 +1,6 @@
 import { MiddlewareAPI } from "redux";
 import IState from "../interfaces/IState";
-import { CREATE, DO_STEP, remove } from "../modules/game/gameActions";
+import { CREATE, DO_STEP, remove, COMPLETE } from "../modules/game/gameActions";
 import { ThunkDispatch } from "redux-thunk";
 import GameAction from "../modules/game/GameAction";
 import { goBack, RouterAction } from "connected-react-router";
@@ -28,7 +28,7 @@ const gameCollector = ({ getState }: MiddlewareAPI) => (next: Dispatch) => (
     const nextId = last ? +last + 1 : 1;
     timer = setTimeout(() => collect(nextId), DELAY_TIME);
   }
-  if (action.type === DO_STEP) {
+  if (action.type === DO_STEP || action.type === COMPLETE) {
     timer && clearTimeout(timer);
     const { gameId } = action.payload;
     timer = setTimeout(() => collect(gameId), DELAY_TIME);
