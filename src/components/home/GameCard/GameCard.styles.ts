@@ -35,8 +35,10 @@ export default makeStyles<undefined, Props>(() => {
   return {
     root: {
       backgroundColor: ({ state }) => backgrounds[state],
+      position: "relative",
       height: 85,
       width: 85,
+      padding: 4,
       border: "0 none",
       "&:hover": { cursor: "pointer" }
     },
@@ -45,6 +47,27 @@ export default makeStyles<undefined, Props>(() => {
     },
     opponent: {
       color: ({ state, result }) => getColor(state, result, "opponent")
+    },
+    container: {
+      height: 40,
+      textAlign: "left",
+      display: "flex"
+    },
+    separator: {
+      border: "none",
+      margin: 0,
+      color: "#828282",
+      height: 1,
+      backgroundColor: "#828282"
+    },
+    name: {
+      flex: 2
+    },
+    timer: {
+      position: "absolute",
+      right: 4,
+      bottom: 2,
+      fontSize: 10
     }
   };
 });

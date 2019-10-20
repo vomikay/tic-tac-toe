@@ -15,9 +15,14 @@ const formatTime = (milliseconds: number) => {
   return `${hh}:${mm}:${ss}`;
 };
 
-const Timer: React.FC<Props> = ({ milliseconds, variant, component }) => {
+const Timer: React.FC<Props> = ({
+  className,
+  milliseconds,
+  variant,
+  component
+}) => {
   return (
-    <Typography component={component} variant={variant}>
+    <Typography className={className} component={component} variant={variant}>
       {formatTime(milliseconds)}
     </Typography>
   );
