@@ -3,7 +3,6 @@ import { History } from "history";
 import { routerMiddleware, LOCATION_CHANGE } from "connected-react-router";
 import thunk from "redux-thunk";
 import { createStateSyncMiddleware } from "redux-state-sync";
-import { createLogger } from "redux-logger";
 import rootReducer from "./rootReducer";
 import { createStore, applyMiddleware } from "redux";
 import {
@@ -23,11 +22,7 @@ export default (history: History) => {
     gameCollector,
     routerMiddleware(history),
     thunk,
-    createStateSyncMiddleware(syncConfig),
-    createLogger({
-      predicate: () => process.env.NODE_ENV === "development",
-      collapsed: true
-    })
+    createStateSyncMiddleware(syncConfig)
   ];
   const persistedReducer = persistReducer(persistConfig, rootReducer(history));
   const store = createStore(persistedReducer, applyMiddleware(...middlewares));
