@@ -2,6 +2,8 @@ import { makeStyles } from "@material-ui/core";
 
 export default makeStyles(theme => ({
   root: {
+    display: "flex",
+    flexDirection: "column",
     position: "relative",
     minHeight: "100vh",
     backgroundColor: "#eee",
@@ -15,10 +17,13 @@ export default makeStyles(theme => ({
     }
   },
   header: {
+    flex: 0,
     backgroundColor: "#000",
     padding: "16px 24px"
   },
   content: {
+    display: "flex",
+    flex: 1,
     padding: "10px 24px",
     alignSelf: "stretch"
   }

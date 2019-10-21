@@ -1,8 +1,7 @@
 import React from "react";
-import { RouteComponentProps } from "react-router";
+import { RouteComponentProps, Redirect } from "react-router";
 import { IState } from "../../redux";
 import { connect } from "react-redux";
-import NotFound from "../layouts/NotFound/NotFound";
 import Game from "../layouts/Game/Game";
 
 type OwnProps = RouteComponentProps<{ id: string }>;
@@ -15,7 +14,7 @@ const mapStateToProps = ({ games }: IState, { match }: OwnProps) => {
 };
 
 const ReactRouter: React.FC<Props> = ({ gameId }) => {
-  return gameId ? <Game gameId={gameId} /> : <NotFound />;
+  return gameId ? <Game gameId={gameId} /> : <Redirect to="/404" />;
 };
 
 export default connect(mapStateToProps)(ReactRouter);
