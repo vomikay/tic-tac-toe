@@ -23,6 +23,7 @@ export default makeStyles(theme => ({
   },
   content: {
     display: "flex",
+    flexDirection: "column",
     flex: 1,
     padding: "10px 24px",
     alignSelf: "stretch"
